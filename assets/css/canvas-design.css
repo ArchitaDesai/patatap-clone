@@ -1,6 +1,9 @@
+/* To have whole width and height of screen for canvas itself */
+
 body, html{
 	margin: 0;
 	height: 100%;
+	overflow: hidden;
 }
 
 canvas{
