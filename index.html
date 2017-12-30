@@ -13,14 +13,9 @@
 	<!-- paperscript -->
 	<script type="text/paperscript" canvas="myCanvas">
 	/*TODO:
-		- If key is a then 1.mp3, b then 2.mp3
-		- Choose random rgb color for the circles
-		- Put these within new js file
-			var sound = new Howl({
-			src: ['assets/sounds/1.mp3']
-		});
-
+		- Put this code within new js file
 		- only show animation & sound if it's an alphabet
+		- remove circles from array once they disappear
 	*/
 
 		// Array to keep track of circles
@@ -28,13 +23,30 @@
 
 		// When key is pressed down
 		function onKeyDown(event){
+			keyPressedCode = event.event.keyCode;
+			if(keyPressedCode>=97 && keyPressedCode<=122)
+				generateCirclesAndSound(keyPressedCode-96);
+			else if(keyPressedCode>=65 && keyPressedCode<=90)
+				generateCirclesAndSound(keyPressedCode-64);
+		}
+
+		function generateCirclesAndSound(n){
 			// maxPoint will have size of the canvas, will be end point
 			var maxPoint = new Point(view.size.width, view.size.height);
 			// Point.random() generates point's X-Y values between 0 and 1
 			var randomPoint = Point.random()*maxPoint;
 			var newCircle = new Path.Circle(randomPoint,350);
-			newCircle.fillColor = "orange";
+			newCircle.fillColor = generateRandomColor();
 			circles.push(newCircle);
+			
+			/* howlerjs - play sound */
+			new Howl({
+				src: ['assets/sounds/' + n + '.mp3']
+			}).play();
+		}
+
+		function generateRandomColor(){
+			return 'rgb(' + Math.random()*256 + ',' + Math.random()*256 + ',' + Math.random()*256 + ')';
 		}
 
 		// Animation handler, to animate all circles
@@ -47,7 +59,6 @@
 				circles[i].scale(0.9);
 			}
 		}
-
 	</script>
 </head>
 <body>
