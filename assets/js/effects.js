@@ -42,7 +42,6 @@ function onFrame(event){
 		if(circles[i].area < 1){
 			circles[i].remove();
 			circles.splice(i,1);
-			console.log(circles);
 		}
 	}
 }
