@@ -57,6 +57,13 @@
 				// Circle's size will scale to 0.9 its original size
 				// Hence, will decrement and fade eventually
 				circles[i].scale(0.9);
+
+				//remove the circle from array if it's faded
+				if(circles[i].area < 1){
+					circles[i].remove();
+					circles.splice(i,1);
+					console.log(circles);
+				}
 			}
 		}
 	</script>
