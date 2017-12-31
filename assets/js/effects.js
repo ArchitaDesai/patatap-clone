@@ -15,14 +15,17 @@ function generateCirclesAndSound(n){
 	var maxPoint = new Point(view.size.width, view.size.height);
 	// Point.random() generates point's X-Y values between 0 and 1
 	var randomPoint = Point.random()*maxPoint;
+	// 350 is radius
 	var newCircle = new Path.Circle(randomPoint,350);
 	newCircle.fillColor = generateRandomColor();
-	circles.push(newCircle);
-	
+
 	/* howlerjs - play sound */
 	new Howl({
 		src: ['assets/sounds/' + n + '.mp3']
 	}).play();
+
+	circles.push(newCircle);
+	
 }
 
 function generateRandomColor(){
